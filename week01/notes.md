@@ -263,7 +263,7 @@ Properties: contains key facts, matches a schema, within length limits, no banne
 
 30. What is a flaky LLM test and how do you reduce flakiness? 
 A test that passes and fails on identical code. Lower temperature, fix seed, loosen assertions to properties, run multiple 
-samples, and use pass-rate thresholds.
+ samples, and use pass-rate thresholds.
 
 31. What is a pass-rate threshold? 
 Running a case N times and requiring, for example, at least 90% passes instead of requiring 100% on a single run.
@@ -352,9 +352,112 @@ No LLM system is 100% accurate. I would report measured quality: pass rates and 
 python -m venv .venv
 .venv\Scripts\activate.bat
 
+>>  run ollama qwen3.5:4b
+ollama run qwen3.5:4b
 
 
 
 
 
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+
+LLM (Large Language Models)
+Models that are trained on large number of texts to predict next token.
+token are like words or subsets of word.
+
+like : llama 2 70b
+The 140 GB is the size of the parameters file: 70 billion parameters at about 2 bytes each. The training text was far larger, roughly 10 TB
+
+you only need 2 files > parameter_file, programming_file
+
+Training of LLM
+1.  Pre training            >> Train on a large set of text to obtain basic models (info can be right/wrong)
+2.  Fine Tuning             >> Train as per the human with correct details like documentation so models can act correctly.
+3.  Comparison(optional)    >>  get more correct response as comparing to the other responses. 
+
+
+LLM Scaling Laws:
+1.  N   >>  The number of parameter of the network.
+2.  D   >>  The amount of text we train on.
+
+
+LLM Attack:
+1.  Prompt Injection    >>  Someone rewrite/overwrite/injects the prompt to infiltereate the data.
+2.  Data Poisoning      >>  Attacker hides a carefully crafted text with a custom trigger phrase like "James Bond" 
+3.  Jailbreaking
+Many more...
+
+
+What an LLM is physically: 
+a model is essentially a parameters file plus a small program that runs it. This is why you can run qwen3.5:4b on your own laptop.
+
+Training vs inference: 
+training is the expensive, one-time stage that compresses lots of text into parameters. Inference is what happens each time you send a prompt.
+
+Next-token prediction: 
+the model generates one token at a time. This is the root of why output varies and why hallucination happens.
+
+Dreaming/hallucination: 
+he shows the model producing plausible text that isn’t backed by facts.
+
+Assistant training: 
+a base model is turned into a chat assistant through fine-tuning on example conversations and human feedback.
+
+Scaling laws: 
+more parameters and more data generally give better results.
+
+Tools and multimodality: 
+models can call tools (browser, calculator, code) and handle images and audio. This leads straight to agents in Week 10.
+
+Security: 
+jailbreaks, prompt injection and data poisoning. We cover these properly in Week 11, but note them now.
+
+
+
+token = word or subsets of a word
+Context window = the maximum number of tokens the model can read and write in one call. Text beyond it is cut off or forgotten
+Temperature = The variablility of the answer for the same input, low = low variability, high = high variability 
+Hallucination = The models gaves the ouput that is not backed by facts.
+Exact match: a better reason is that one correct answer has many valid wordings. We still compare, but on meaning or properties instead of characters.
+Prompt injection: it overrides the developer’s instructions. Data leakage is one possible result, not the definition.
+Jailbreaking: you listed it but didn’t define it. It means tricking the model into ignoring its safety rules.
+Data poisoning: the model then behaves wrongly when the trigger phrase appears.
+
+Testing angle =
+exact match assertions not work because here we're not comparing the string, we can find the output as close as its actual meaning.
+As as sdet it changes because through ai first we can understand the motive and according to it, it can helps for test cases creation, report handling, flaky testcases.
+We can also understand the flow and found the bug and resolve it before it can actually run.
+   
+That is a consequence for testing, not the cause. The cause is that the model produces a probability distribution over the next token and samples from it, so the same prompt can lead down different paths. Small numeric differences on the hardware add to this.
+
+Cause: sampling from probabilities.
+Testing consequence: exact-match assertions break, so you check properties, meaning or scores instead.
+
+
+
+
+What	                                                    Ollama	                                                Gemini
+Answer text	                                        message.content	                                        candidates[0].content.parts[0].text
+Prompt tokens	                                    prompt_eval_count (24)	                                usageMetadata.promptTokenCount (12)
+Output tokens	                                            eval_count (9)	                                usageMetadata.candidatesTokenCount (8)
+Total time	                                            total_duration (about 7.9 s)                        not in the response, so you measure it yourself
+Why it stopped	                                    done_reason (“stop”)	                                    candidates[0].finishReason (“STOP”)
+
+
+
+
+temperature = randomness
+seed = repeatability
+
+
+Temperature controls how much variation is allowed, and the seed controls whether the dice rolls are repeatable.
+
+Your counts table: 1 / 10 / 10 unique for the three temperatures.
+The [Shop Name] finding and the invented brand names.
+A corrected sentence about the seed: “A seed fixes the random draws, so outputs repeat only when temperature is above 0 and the setup is unchanged.”
+The truncation observation, including that 300 tokens still gave length

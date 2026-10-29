@@ -1,0 +1,31 @@
+temperature,run,answer,output_tokens,done_reason,seconds
+0,1,Start your day with a cup that wakes up your soul.,13,stop,15.46
+0,2,Start your day with a cup that wakes up your soul.,13,stop,3.53
+0,3,Start your day with a cup that wakes up your soul.,13,stop,3.44
+0,4,Start your day with a cup that wakes up your soul.,13,stop,3.54
+0,5,Start your day with a cup that wakes up your soul.,13,stop,3.62
+0,6,Start your day with a cup that wakes up your soul.,13,stop,3.5
+0,7,Start your day with a cup that wakes up your soul.,13,stop,3.47
+0,8,Start your day with a cup that wakes up your soul.,13,stop,3.45
+0,9,Start your day with a cup that wakes up your soul.,13,stop,3.38
+0,10,Start your day with a cup that wakes up your soul.,13,stop,3.45
+0.5,1,Start your day with a cup that warms the soul and fuels your dreams.,17,stop,3.85
+0.5,2,"Wake up to warmth, find your rhythm, and start your day with every cup of perfect brewed coffee.",22,stop,4.3
+0.5,3,Start your day with a cup that warms your soul and fuels your dreams.,17,stop,3.79
+0.5,4,"Wake up to warmth, find your rhythm, and start your day with a cup that fits your soul.",22,stop,4.25
+0.5,5,"Wake up to warmth, find your rhythm, and fuel your day at The Daily Grind.",20,stop,4.09
+0.5,6,Start your day with the perfect blend of energy and warmth.,13,stop,3.42
+0.5,7,Wake up to warmth and end the day with comfort at The Daily Grind.,17,stop,3.83
+0.5,8,Start your day with the perfect cup of coffee and endless possibilities.,14,stop,3.53
+0.5,9,Wake up to warmth and find your day in every cup.,13,stop,3.52
+0.5,10,Wake up to the aroma of roasted beans and start your day with a cup that warms your soul.,22,stop,4.28
+1.0,1,"Wake up to joy, savor the day: [Shop Name] Coffee Shop.",18,stop,3.96
+1.0,2,Start your day with the perfect cup of coffee.,11,stop,3.29
+1.0,3,Your perfect cup of inspiration starts here.,9,stop,3.09
+1.0,4,Wake up to warmth and fuel your day.,10,stop,3.17
+1.0,5,"Wake up, breathe easy, and find your moment in every cup we serve.",17,stop,3.75
+1.0,6,Where every cup of coffee begins a story worth telling.,12,stop,3.33
+1.0,7,Start your day with the perfect cup of joy at Café Lumière.,15,stop,3.71
+1.0,8,"Start your day with the perfect blend of energy and warmth, because every cup is designed to lift your spirit.",23,stop,4.47
+1.0,9,Every sip is a moment to slow down and reconnect with your day.,15,stop,3.59
+1.0,10,Start your day right where the perfect cup meets your perfect view.,14,stop,3.49
